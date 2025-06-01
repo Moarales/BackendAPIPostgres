@@ -1,6 +1,7 @@
 const express = require('express');
 const { Pool } = require('pg');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 require('dotenv').config()
 
 console.log(process.env)
@@ -8,6 +9,8 @@ console.log(process.env)
 const app = express();
 app.use(bodyParser.json());
 app.use(express.urlencoded({extended: true}));
+
+app.use(cors());
 
 const pool = new Pool({
   user: process.env.DBUSER,
@@ -28,6 +31,7 @@ app.get('/items', async (req, res) => {
 
 app.delete('/items/:id', async (req, res) => {
 try{
+	console.log("recevied request on delete")
 	const id = parseInt(req.params.id); // Parse ID from URL parameter
 	console.log(id);
 	const query = {
@@ -64,5 +68,5 @@ catch (error) {
     })
 
 app.listen(3001, () => {
-  console.log('Server running on port 3000');
+  console.log('Server running on port 3001');
 });
