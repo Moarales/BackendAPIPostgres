@@ -8,4 +8,4 @@ node index.js
 ##For Startup on Linux every reboot i use pm2
 pm2 start server.js
 
-and a cronjob to reboot
+and a cronjob to start it with the server
